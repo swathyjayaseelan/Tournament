@@ -6,6 +6,10 @@
 -- You can write comments in this file by starting them with two dashes, like
 -- these lines here.
 --Main table which holds the full name of the players, number of matches they have played and an unique id
-create table players (id serial primary key, fullname text, matches integer default 0);
+DROP DATABASE IF EXISTS tournament
+CREATE DATABASE tournament
+\c tournament
+CREATE TABLE players (id serial primary key, fullname text, matches integer default 0);
 --A table to record the total wins of each player where id is the Foreign key which must match the id in players table
-create table wins (id serial references players, wins integer);
+CREATE TABLE  wins (id serial references players, wins integer);
+--CREATE VIEW standings AS SELECT players.id,players.fullname,wins.wins,players.matches FROM players LEFT JOIN wins ON wins.id=players.id ORDER BY wins.wins DESC;
